@@ -1,6 +1,6 @@
 async function addResourcesToCache(resources) {
-  const cache = await caches.open("v1");
-  cache.addAll(resources);
+  const cache = await caches.open("v8");
+  await cache.addAll(resources);
 }
 self.addEventListener("install", function (e) {
   e.waitUntil(addResourcesToCache([
@@ -18,8 +18,8 @@ self.addEventListener("install", function (e) {
   ]));
 });
 async function putInCache(request, response) {
-  const cache = await caches.open("v1");
-  cache.put(request, response);
+  const cache = await caches.open("v8");
+  await cache.put(request, response);
 }
 async function cacheFirst(request, fallbackURL) {
   const responseFromCache = await caches.match(request);
