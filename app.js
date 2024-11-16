@@ -361,6 +361,7 @@ async function registerServiceWorker() {
     }
   }
 };
+registerServiceWorker();
 window.onload = function (e) {
   const openRequest = indexedDB.open("v1");
   openRequest.onsuccess = function (e) {
