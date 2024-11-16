@@ -373,7 +373,7 @@ window.onload = function (e) {
     let data = transaction.objectStore("data");
     let requestDataAmx = data.get("dataAmx");
     requestDataAmx.onsuccess = function () {
-      db.amx = request.result;
+      db.amx = requestDataAmx.result;
       displayAttendanceRegister();
     };
     requestDataAmx.onerror = function (e) {
@@ -382,10 +382,10 @@ window.onload = function (e) {
     };
     let requestConfigSubs = data.get("configSubs");
     requestConfigSubs.onsuccess = function () {
-      cfg.subs = request.result;
+      cfg.subs = requestConfigSubs.result;
       displayAttendanceMark();
     };
-    request.onerror = function (e) {
+    requestConfigSubs.onerror = function (e) {
       cfg.subs = [];
     };
   };
