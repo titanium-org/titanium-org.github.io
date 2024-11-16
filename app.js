@@ -379,7 +379,7 @@ window.onload = function (e) {
     };
     let requestConfigSubs = data.get("configSubs");
     requestConfigSubs.onsuccess = function () {
-      cfg.subs = request.result;
+      cfg.subs = requestConfigSubs.result;
       displayAttendanceMark();
     };
     requestConfigSubs.onerror = function (e) {
