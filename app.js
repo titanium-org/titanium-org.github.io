@@ -392,10 +392,10 @@ window.onload = function (e) {
   openRequest.onupgradeneeded = function (e) {
     let database = openRequest.result;
     if (!database.objectStoreNames.contains("data")) {
-      let request = database.createObjectStore("data");
+      let request = database.createObjectStore("data", {keyPath: "timeStamp"});
     }
     if (!database.objectStoreNames.contains("config")) {
-      let request = database.createObjectStore("config");
+      let request = database.createObjectStore("config", {keyPath: "timeStamp"});
     }
     for (let i = 0; i < database.objectStoreNames.length; i++ ) {
       console.log(database.objectStoreNames.item(i));
