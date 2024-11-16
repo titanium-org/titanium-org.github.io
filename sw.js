@@ -2,21 +2,6 @@ async function addResourcesToCache(resources) {
   const cache = await caches.open("v8");
   await cache.addAll(resources);
 }
-self.addEventListener("install", function (e) {
-  e.waitUntil(addResourcesToCache([
-    "/",
-    "index.html",
-    "style.css",
-    "home-section.html",
-    "attendance-tracker-section.css",
-    "event-manager-section.css",
-    "app.js",
-    "ss-jost-normal.woff2",
-    "font.css",
-    "icon-font.woff2",
-    "icons.css"
-  ]));
-});
 async function putInCache(request, response) {
   const cache = await caches.open("v8");
   await cache.put(request, response);
@@ -40,6 +25,29 @@ async function cacheFirst(request, fallbackURL) {
     });
   }
 }
+self.addEventListener("install", function (e) {
+  e.waitUntil(addResourcesToCache([
+    "/",
+    "index.html",
+    "style.css",
+    "home-section.html",
+    "attendance-tracker-section.css",
+    "event-manager-section.css",
+    "app.js",
+    "ss-jost-normal.woff2",
+    "font.css",
+    "icon-font.woff2",
+    "icons.css"
+  ]));
+});
+self.addEventListener("activate", async (e) => {
+  const cacheKeepList = ["v8"];
+  const cacheAllList = await caches.keys();
+  const cacheDeleteList = cacheAllList.filter(e => !cacheKeepList.includes(e));
+  for (let c of cacheDeleteList) {
+    await caches.delete(c);
+  }
+});
 self.addEventListener("fetch", function (e) {
   e.respondWith(cacheFirst(e.request, "/fallback.html"));
 });
