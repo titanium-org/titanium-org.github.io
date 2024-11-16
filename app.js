@@ -380,7 +380,7 @@ window.onload = function (e) {
     };
     let requestConfigSubs = data.get("configSubs");
     requestConfigSubs.onsuccess = function () {
-      cfg.subs = requestConfigSubs.result ||   subs: ["ClickOn", "Top-leftIcon", "ToAdd", "OrDelete", "Subjects"];
+      cfg.subs = requestConfigSubs.result || ["ClickOn", "Top-leftIcon", "ToAdd", "OrDelete", "Subjects"];
       displayAttendanceMark();
     };
     requestConfigSubs.onerror = function (e) {
