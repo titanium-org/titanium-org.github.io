@@ -1,5 +1,5 @@
 async function addResourcesToCache(resources) {
-  const cache = caches.open("v1");
+  const cache = await caches.open("v1");
   cache.addAll(resources);
 }
 self.addEventListener("install", function (e) {
@@ -22,7 +22,7 @@ async function putInCache(request, response) {
   cache.put(request, response);
 }
 async function cacheFirst(request, fallbackURL) {
-  const responseFromCache = caches.match(request);
+  const responseFromCache = await caches.match(request);
   if (responseFromCache) return responseFromCache;
   try {
     const responseFromNetwork = await fetch(request);
