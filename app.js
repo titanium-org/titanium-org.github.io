@@ -1,5 +1,5 @@
 "use strict";
-const appVersion = 2;
+const appVersion = 3;
 Date.prototype.getMonthLength = function () {
   let m = this.getMonth(), y = this.getFullYear();
   let ml = (m % 2 == 0)? 31: 30;
@@ -180,7 +180,6 @@ function editSubjects() {
     let x = new Set(str.split(/,+\s*/));
     cfg.subs = Array.from(x).filter(x => x != "");
   }
-  updateConfigurationSubs();
   displayAttendanceMark();
 }
 if (cfg.subs.length == 0) editSubjects();
@@ -346,6 +345,7 @@ function displayAttendanceMark() {
       displayAttendanceRegister();
     });
   });
+  updateConfigSubs();
 }
 displayAttendanceMark();
 atmdsi.addEventListener("change", displayAttendanceMark);
@@ -366,7 +366,7 @@ async function registerServiceWorker() {
 };
 registerServiceWorker();
 window.onload = function (e) {
-  const openRequest = indexedDB.open("v2", 2);
+  const openRequest = indexedDB.open("v3", 3);
   openRequest.onsuccess = function (e) {
     let database = openRequest.result;
     let transaction = database.transaction(["data"], "readonly");
@@ -403,7 +403,7 @@ window.onload = function (e) {
   };
 };
 function updateDataAmx() {
-  const openRequest = indexedDB.open("v2", 2);
+  const openRequest = indexedDB.open("v3", 3);
   openRequest.onsuccess = function (e) {
     let database = openRequest.result;
     let transaction = database.transaction(["data"], "readwrite");
@@ -420,8 +420,8 @@ function updateDataAmx() {
     console.log(e);
   };
 }
-function updateConfigurationSubs() {
-  const openRequest = indexedDB.open("v2", 2);
+function updateConfigSubs() {
+  const openRequest = indexedDB.open("v3", 3);
   openRequest.onsuccess = function (e) {
     let database = openRequest.result;
     let transaction = database.transaction(["config"], "readwrite");
