@@ -389,10 +389,10 @@ window.onload = function (e) {
   openRequest.onupgradeneeded = function (e) {
     let database = openRequest.result;
     if (!database.objectStoreNames.contains("data")) {
-      let request = database.createObjectStore("data");
+      let request = database.createObjectStore("data", {keyPath: "timeStamp"});
     }
     if (!database.objectStoreNames.contains("config")) {
-      let request = database.createObjectStore("config");
+      let request = database.createObjectStore("config", {keyPath: "timeStamp");
     }
   };
   openRequest.onerror = function (e) {
