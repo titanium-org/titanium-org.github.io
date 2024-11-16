@@ -344,6 +344,7 @@ function displayAttendanceMark() {
       displayAttendanceRegister();
     });
   });
+  updateConfigSubs();
 }
 displayAttendanceMark();
 atmdsi.addEventListener("change", displayAttendanceMark);
@@ -420,7 +421,7 @@ function updateDataAmx() {
     console.log(e);
   };
 }
-function updateConfigurationSubs() {
+function updateConfigSubs() {
   const openRequest = indexedDB.open("v8", 8);
   openRequest.onsuccess = function (e) {
     let database = openRequest.result;
