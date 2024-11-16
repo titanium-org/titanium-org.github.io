@@ -392,10 +392,10 @@ window.onload = function (e) {
   openRequest.onupgradeneeded = function (e) {
     let database = openRequest.result;
     if (!database.objectStoreNames.contains("data")) {
-      let request = database.createObjectStore("data", {keyPath: "timeStamp"});
+      let request = database.createObjectStore("data");
     }
     if (!database.objectStoreNames.contains("config")) {
-      let request = database.createObjectStore("config", {keyPath: "timeStamp"});
+      let request = database.createObjectStore("config");
     }
   };
   openRequest.onerror = function (e) {
