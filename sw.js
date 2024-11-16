@@ -1,10 +1,10 @@
 async function addResourcesToCache(resources) {
-  const cache = await caches.open("v2");
+  const cache = await caches.open("v3");
   console.log(cache)
   cache.addAll(resources);
 }
 async function putInCache(request, response) {
-  const cache = await caches.open("v2");
+  const cache = await caches.open("v3");
   cache.put(request, response);
 }
 async function cacheFirst(request, fallbackURL) {
@@ -45,7 +45,7 @@ self.addEventListener("install", function (e) {
   ]));
 });
   self.addEventListener("activate", async (e) => {
-    const cacheKeepList = ["v2"];
+    const cacheKeepList = ["v3"];
     const cacheAllList = await caches.keys();
     const cacheDeleteList = cacheAllList.filter(e => !cacheKeepList.includes(e));
     for (let c of cacheDeleteList) {
