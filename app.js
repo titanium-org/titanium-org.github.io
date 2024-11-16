@@ -423,8 +423,8 @@ function updateConfigSubs() {
   const openRequest = indexedDB.open("v2", 2);
   openRequest.onsuccess = function (e) {
     let database = openRequest.result;
-    let transaction = database.transaction(["config"], "readwrite");
-    let data = transaction.objectStore("config");
+    let transaction = database.transaction(["data"], "readwrite");
+    let data = transaction.objectStore("data");
     let request = data.put(cfg.subs, "configSubs");
     request.onsuccess = function (e) {
       console.log(e.target.result);
