@@ -363,27 +363,30 @@ async function registerServiceWorker() {
 };
 registerServiceWorker();
 window.onload = function (e) {
-  const openRequest = indexedDB.open("v2", 2);
+  const openRequest = indexedDB.open("v8", 8);
   openRequest.onsuccess = function (e) {
     let database = openRequest.result;
-    let transaction = database.transaction(["data"], "readonly");
+    let transaction = database.transaction(["data", "config"], "readonly");
     let data = transaction.objectStore("data");
     let requestDataAmx = data.get("dataAmx");
     requestDataAmx.onsuccess = function () {
       db.amx = requestDataAmx.result;
+      if (db.amx == undefined) db.amx = [];
       displayAttendanceRegister();
     };
     requestDataAmx.onerror = function (e) {
       db.amx = [];
       console.log(e);
     };
+    let config  = transaction.objectStore("config");
     let requestConfigSubs = data.get("configSubs");
     requestConfigSubs.onsuccess = function () {
       cfg.subs = requestConfigSubs.result;
+      if (cfg.subs == undefined) cfg.subs = ["ClickOn", "Top-leftIcon", "ToAdd", "OrDelete", "Subjects"];
       displayAttendanceMark();
     };
     requestConfigSubs.onerror = function (e) {
-      cfg.subs = [];
+      cfg.subs = ["ClickOn", "Top-leftIcon", "ToAdd", "OrDelete", "Subjects"];
     };
   };
   openRequest.onupgradeneeded = function (e) {
@@ -400,7 +403,7 @@ window.onload = function (e) {
   };
 };
 function updateDataAmx() {
-  const openRequest = indexedDB.open("v2", 2);
+  const openRequest = indexedDB.open("v8", 8);
   openRequest.onsuccess = function (e) {
     let database = openRequest.result;
     let transaction = database.transaction(["data"], "readwrite");
@@ -418,7 +421,7 @@ function updateDataAmx() {
   };
 }
 function updateConfigurationSubs() {
-  const openRequest = indexedDB.open("v2", 2);
+  const openRequest = indexedDB.open("v8", 8);
   openRequest.onsuccess = function (e) {
     let database = openRequest.result;
     let transaction = database.transaction(["config"], "readwrite");
