@@ -1,11 +1,11 @@
 async function addResourcesToCache(resources) {
   const cache = await caches.open("v3");
   console.log(cache)
-  cache.addAll(resources);
+  await cache.addAll(resources);
 }
 async function putInCache(request, response) {
   const cache = await caches.open("v3");
-  cache.put(request, response);
+  await cache.put(request, response);
 }
 async function cacheFirst(request, fallbackURL) {
   const responseFromCache = await caches.match(request);
