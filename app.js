@@ -397,7 +397,7 @@ window.onload = function (e) {
     if (!database.objectStoreNames.contains("config")) {
       let request = database.createObjectStore("config");
     }
-    for (let i = 0; i < database.objectStoreNames.length; i++) {
+    for (let i = 0; i < database.objectStoreNames.length; i++ ) {
       console.log(database.objectStoreNames.item(i));
     }
   };
