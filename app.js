@@ -352,7 +352,6 @@ atmdsi.addEventListener("change", displayAttendanceMark);
 
 async function registerServiceWorker() {
   if ("serviceWorker" in navigator) {
-
     try {
       let reg = navigator.serviceWorker.register("/sw.js");
       if (reg.installing) cosnole.log("Service Worker Installing");
@@ -369,7 +368,7 @@ window.onload = function (e) {
   const openRequest = indexedDB.open("v3", 3);
   openRequest.onsuccess = function (e) {
     let database = openRequest.result;
-    let transaction = database.transaction(["data"], "readonly");
+    let transaction = database.transaction(["data", "config"], "readonly");
     let data = transaction.objectStore("data");
     let requestDataAmx = data.get("dataAmx");
     requestDataAmx.onsuccess = function () {
@@ -380,6 +379,7 @@ window.onload = function (e) {
       db.amx = [];
       console.log(e);
     };
+    data = transaction.objectStore("config");
     let requestConfigSubs = data.get("configSubs");
     requestConfigSubs.onsuccess = function () {
       cfg.subs = request.result;
