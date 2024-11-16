@@ -363,21 +363,27 @@ async function registerServiceWorker() {
 };
 registerServiceWorker();
 window.onload = function (e) {
-  const openRequest = indexedDB.open("v1");
+  const openRequest = indexedDB.open("v2", 2);
   openRequest.onsuccess = function (e) {
     let database = openRequest.result;
     let transaction = database.transaction(["data"], "readonly");
     let data = transaction.objectStore("data");
-    let request = data.get("dataAmx");
-    if (!data.getKey("dataAmx")) return;
-    request.onsuccess = function () {
+    let requestDataAmx = data.get("dataAmx");
+    requestDataAmx.onsuccess = function () {
       db.amx = request.result;
-      if (db.amx == undefined) db.amx = [];
-      displayAttendanceMark();
       displayAttendanceRegister();
     };
-    request.onerror = function (e) {
+    requestDataAmx.onerror = function (e) {
+      db.amx = [];
       console.log(e);
+    };
+    let requestConfigSubs = data.get("configSubs");
+    requestConfigSubs.onsuccess = function () {
+      cfg.subs = request.result;
+      displayAttendanceMark();
+    };
+    request.onerror = function (e) {
+      cfg.subs = [];
     };
   };
   openRequest.onupgradeneeded = function (e) {
@@ -385,18 +391,39 @@ window.onload = function (e) {
     if (!database.objectStoreNames.contains("data")) {
       let request = database.createObjectStore("data");
     }
+    if (!database.objectStoreNames.contains("config")) {
+      let request = database.createObjectStore("config");
+    }
   };
   openRequest.onerror = function (e) {
     console.log(e);
   };
 };
 function updateDataAmx() {
-  const openRequest = indexedDB.open("v1");
+  const openRequest = indexedDB.open("v2", 2);
   openRequest.onsuccess = function (e) {
     let database = openRequest.result;
     let transaction = database.transaction(["data"], "readwrite");
     let data = transaction.objectStore("data");
     let request = data.put(db.amx, "dataAmx");
+    request.onsuccess = function (e) {
+      console.log(e.target.result);
+    };
+    request.onerror = function (e) {
+      console.log(e);
+    };
+  };
+  openRequest.onerror = function (e) {
+    console.log(e);
+  };
+}
+function updateConfigurationSubs() {
+  const openRequest = indexedDB.open("v2", 2);
+  openRequest.onsuccess = function (e) {
+    let database = openRequest.result;
+    let transaction = database.transaction(["config"], "readwrite");
+    let data = transaction.objectStore("config");
+    let request = data.put(cfg.subs, "configSubs");
     request.onsuccess = function (e) {
       console.log(e.target.result);
     };
