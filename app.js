@@ -395,7 +395,7 @@ window.onload = function (e) {
       let request = database.createObjectStore("data", {keyPath: "timeStamp"});
     }
     if (!database.objectStoreNames.contains("config")) {
-      let request = database.createObjectStore("config", {keyPath: "timeStamp");
+      let request = database.createObjectStore("config", {keyPath: "timeStamp"});
     }
   };
   openRequest.onerror = function (e) {
