@@ -30,7 +30,7 @@ self.addEventListener("install", function (e) {
     "/",
     "index.html",
     "style.css",
-    "home-section.html",
+    "home-section.css",
     "attendance-tracker-section.css",
     "event-manager-section.css",
     "app.js",
