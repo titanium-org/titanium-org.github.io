@@ -93,7 +93,7 @@ let db = {
 db.sortAmx = function () {
   db.amx.sort((a, b) => (a.date < b.date)? -1: (a.date > b.date)? 1: 0);
 };
-let config = {
+let cfg = {
   subs: ["ClickOn", "Top-leftIcon", "ToAdd", "OrDelete", "Subjects"]
 };
 nat.initialLayout = function () {
@@ -172,16 +172,16 @@ atxsm.onclick = function () {
 };
 
 function editSubjects() {
-  let cur = config.subs.join(", ");
+  let cur = cfg.subs.join(", ");
   let str = "";
   while (!(/(\w+)/.test(str))) {
     str = prompt("Enter the subjects separated by comma: ", (cur)? cur: "");
     let x = new Set(str.split(/,+\s*/));
-    config.subs = Array.from(x).filter(x => x != "");
+    cfg.subs = Array.from(x).filter(x => x != "");
   }
   displayAttendanceMark();
 }
-if (config.subs.length == 0) editSubjects();
+if (cfg.subs.length == 0) editSubjects();
 configButton.onclick = editSubjects; 
 const createAttendance = (date, sub, pre, abs, timeStamp) => ({date: date, sub: sub, pre: pre, abs: abs, timeStamp: timeStamp});
 
@@ -288,7 +288,7 @@ atrmsi.addEventListener("change", displayAttendanceRegister);
 // Making the attendance mark list functional.
 function displayAttendanceMark() {
   while (atmlic.firstChild) atmlic.removeChild(atmlic.firstChild);
-  config.subs.forEach(sub => {
+  cfg.subs.forEach(sub => {
     let date = atmdsi.value;
     let atmli = document.createElement("div");
     let div = document.createElement("div");
