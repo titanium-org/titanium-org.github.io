@@ -181,7 +181,6 @@ function editSubjects() {
     cfg.subs = Array.from(x).filter(x => x != "");
   }
   updateConfigurationSubs();
-  displayAttendanceMark();
 }
 if (cfg.subs.length == 0) editSubjects();
 configButton.onclick = editSubjects; 
