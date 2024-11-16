@@ -180,6 +180,7 @@ function editSubjects() {
     let x = new Set(str.split(/,+\s*/));
     cfg.subs = Array.from(x).filter(x => x != "");
   }
+  displayAttendanceMark();
 }
 if (cfg.subs.length == 0) editSubjects();
 configButton.onclick = editSubjects; 
