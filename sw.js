@@ -18,11 +18,11 @@ self.addEventListener("install", function (e) {
   ]));
 });
 async function putInCache(request, response) {
-  const cache = caches.open("v1");
-  await cache.put(request, response);
+  const cache = await caches.open("v1");
+  cache.put(request, response);
 }
 async function cacheFirst(request, fallbackURL) {
-  const responseFromeCache = caches.match(request);
+  const responseFromCache = caches.match(request);
   if (responseFromCache) return responseFromCache;
   try {
     const responseFromNetwork = await fetch(request);
