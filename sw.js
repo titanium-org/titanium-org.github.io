@@ -1,5 +1,5 @@
 async function addResourcesToCache(resources) {
-  const cache = caches.open("attendance-2");
+  const cache = caches.open("v1");
   cache.addAll(resources);
 }
 self.addEventListener("install", function (e) {
