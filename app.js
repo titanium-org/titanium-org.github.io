@@ -373,16 +373,15 @@ window.onload = function (e) {
     let data = transaction.objectStore("data");
     let requestDataAmx = data.get("dataAmx");
     requestDataAmx.onsuccess = function () {
-      db.amx = requestDataAmx.result;
+      db.amx = requestDataAmx.result || [];
       displayAttendanceRegister();
     };
     requestDataAmx.onerror = function (e) {
-      db.amx = [];
       console.log(e);
     };
     let requestConfigSubs = data.get("configSubs");
     requestConfigSubs.onsuccess = function () {
-      cfg.subs = requestConfigSubs.result;
+      cfg.subs = requestConfigSubs.result || [];
       displayAttendanceMark();
     };
     requestConfigSubs.onerror = function (e) {
