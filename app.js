@@ -32,6 +32,8 @@ dSelectors.forEach((selector) => {
   output.textContent = DAYS[date.getDay()] + " " + date.getDate() + " " + MONTHS[date.getMonth()] + " " + date.getFullYear();
   output.onclick = () => { input.click(); }
   icon.onclick = () => { input.click(); }
+  output.onmousedown = () => { input.click(); }
+  icon.onmousedown = () => { input.click(); }
   input.onchange = function () {
     selector.setAttribute("selected-date", input.value);
     let date = new Date(input.value);
@@ -48,6 +50,8 @@ mSelectors.forEach((selector) => {
   output.textContent = MONTHS[date.getMonth()] + " " + date.getFullYear();
   output.onclick = () => { input.click(); }
   icon.onclick = () => { input.click(); }
+  output.onmousedown = () => { input.click(); }
+  icon.onmousedown = () => { input.click(); }
   input.onchange = function () {
     selector.setAttribute("selected-value", input.value);
     let date = new Date(input.value);
