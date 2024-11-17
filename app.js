@@ -364,10 +364,10 @@ async function registerServiceWorker() {
 };
 registerServiceWorker();
 window.onload = function (e) {
-  const openRequest = indexedDB.open("v8", 8);
+  const openRequest = indexedDB.open("v20", 20);
   openRequest.onsuccess = function (e) {
     let database = openRequest.result;
-    let transaction = database.transaction(["data", "config"], "readonly");
+    let transaction = database.transaction(["data"], "readonly");
     let data = transaction.objectStore("data");
     let requestDataAmx = data.get("dataAmx");
     requestDataAmx.onsuccess = function () {
@@ -379,6 +379,7 @@ window.onload = function (e) {
       db.amx = [];
       console.log(e);
     };
+    transaction = database.transaction(["config"], "readonly");
     let config  = transaction.objectStore("config");
     let requestConfigSubs = data.get("configSubs");
     requestConfigSubs.onsuccess = function () {
@@ -404,7 +405,7 @@ window.onload = function (e) {
   };
 };
 function updateDataAmx() {
-  const openRequest = indexedDB.open("v8", 8);
+  const openRequest = indexedDB.open("v20", 20);
   openRequest.onsuccess = function (e) {
     let database = openRequest.result;
     let transaction = database.transaction(["data"], "readwrite");
@@ -422,7 +423,7 @@ function updateDataAmx() {
   };
 }
 function updateConfigSubs() {
-  const openRequest = indexedDB.open("v8", 8);
+  const openRequest = indexedDB.open("v20", 20);
   openRequest.onsuccess = function (e) {
     let database = openRequest.result;
     let transaction = database.transaction(["config"], "readwrite");
