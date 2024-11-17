@@ -363,7 +363,7 @@ async function registerServiceWorker() {
   }
 };
 registerServiceWorker();
-window.onDOMContentLoaded = function (e) {
+window.onload = function (e) {
   const openRequest = indexedDB.open("v20", 20);
   openRequest.onsuccess = function (e) {
     let database = openRequest.result;
@@ -410,6 +410,7 @@ function updateDataAmx() {
   openRequest.onsuccess = function (e) {
     let database = openRequest.result;
     let transaction = database.transaction(["data"], "readwrite");
+    if (!database.objectStoreNames.contains("data")) return;
     let data = transaction.objectStore("data");
     let request = data.put(db.amx, "dataAmx");
     request.onsuccess = function (e) {
@@ -428,6 +429,7 @@ function updateConfigSubs() {
   openRequest.onsuccess = function (e) {
     let database = openRequest.result;
     let transaction = database.transaction(["config"], "readwrite");
+    if (!database.objectStoreNames.contains("config")) return;
     let data = transaction.objectStore("config");
     let request = data.put(cfg.subs, "configSubs");
     request.onsuccess = function (e) {
