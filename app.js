@@ -364,7 +364,7 @@ async function registerServiceWorker() {
 };
 registerServiceWorker();
 window.onload = function (e) {
-  const openRequest = indexedDB.open("v20", 20);
+  const openRequest = indexedDB.open("database", 1);
   openRequest.onsuccess = function (e) {
     let database = openRequest.result;
     let transaction = database.transaction(["data"], "readonly");
@@ -406,7 +406,7 @@ window.onload = function (e) {
   };
 };
 function updateDataAmx() {
-  const openRequest = indexedDB.open("v20", 20);
+  const openRequest = indexedDB.open("database", 1);
   openRequest.onsuccess = function (e) {
     let database = openRequest.result;
     if (!database.objectStoreNames.contains("data")) return;
@@ -425,7 +425,7 @@ function updateDataAmx() {
   };
 }
 function updateConfigSubs() {
-  const openRequest = indexedDB.open("v20", 20);
+  const openRequest = indexedDB.open("database", 1);
   openRequest.onsuccess = function (e) {
     let database = openRequest.result;
     if (!database.objectStoreNames.contains("config")) return;
