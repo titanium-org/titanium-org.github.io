@@ -391,7 +391,7 @@ window.onload = function (e) {
       cfg.subs = ["ClickOn", "Top-leftIcon", "ToAdd", "OrDelete", "Subjects"];
     };
   };
-  openRequest.onupgradeneeded = function (e) {
+  openRequest.addEventListener("upgradeneeded", function (e) {
     console.log("From upgradeneeded");
     let database = openRequest.result;
     if (!database.objectStoreNames.contains("data")) {
@@ -400,7 +400,7 @@ window.onload = function (e) {
     if (!database.objectStoreNames.contains("config")) {
       let request = database.createObjectStore("config");
     }
-  };
+  });
   openRequest.onerror = function (e) {
     console.log(e);
   };
