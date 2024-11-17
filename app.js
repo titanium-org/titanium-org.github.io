@@ -363,7 +363,7 @@ async function registerServiceWorker() {
   }
 };
 registerServiceWorker();
-window.onload = function (e) {
+window.onDOMContentLoaded = function (e) {
   const openRequest = indexedDB.open("v20", 20);
   openRequest.onsuccess = function (e) {
     let database = openRequest.result;
@@ -392,6 +392,7 @@ window.onload = function (e) {
     };
   };
   openRequest.onupgradeneeded = function (e) {
+    console.log("From upgradeneeded");
     let database = openRequest.result;
     if (!database.objectStoreNames.contains("data")) {
       let request = database.createObjectStore("data");
